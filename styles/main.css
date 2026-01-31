@@ -1,7 +1,11 @@
+:root {
+    --color-main: #7796ba;
+}
+
 body {
     margin: 0;
     padding: 0;
-    background-color: rgb(130, 161, 229);
+    background-color: var(--color-main);
     text-align: center;
     user-select: none;
 }
