@@ -3,4 +3,5 @@ body {
     padding: 0;
     background-color: rgb(130, 161, 229);
     text-align: center;
+    user-select: none;
 }
