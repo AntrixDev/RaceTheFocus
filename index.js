@@ -24,6 +24,10 @@ function createWindow() {
   ipcMain.on("load-page", (event, page) => {
     win.loadFile(page);
   });
+
+  ipcMain.on("close-window", () => {
+    win.close();
+  });
 }
 
 app.whenReady().then(() => {
