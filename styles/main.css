@@ -1,6 +1,6 @@
 :root {
-    --color-main: #f4f1e9;
-    --color-btn-drink: #efe8de;
+    --color-main: #efece3;
+    --color-btn-drink: #e3ded3;
     
     --color-text-primary: #76685c;
     --color-text-secondary: #a08e7e;
@@ -10,7 +10,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    background-color: var(--color-main);
+    background-color: #f2efe8;
     font-family: sans-serif;
     display: flex;
     justify-content: center;
@@ -24,7 +24,8 @@ main {
     text-align: center;
     position: relative;
     width: 300px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    user-select: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.094);
 }
 
 #btn-close {
@@ -35,9 +36,9 @@ main {
     border: none;
     font-size: 24px;
     cursor: pointer;
-    color: #000000;
+    color: var(--color-text-primary);
 }
 
 #btn-close:hover {
-    color: #00000074;
+    color: #76685ca1;
 }
