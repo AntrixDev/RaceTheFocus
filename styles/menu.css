@@ -1,0 +1,18 @@
+h1 {
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+p {
+    font-size: 14px;
+    color: #a08e7e;
+    margin-top: 0;
+    margin-bottom: 18px;
+}
+
+.dots {
+    color: #a08e7e;
+    font-size: 18px;
+    margin-top: 20px;
+    letter-spacing: 2px;
+}
