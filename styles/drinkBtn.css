@@ -2,14 +2,23 @@
     width: 100%;
     background-color: var(--color-btn-drink);
     border: none;
+    border-radius: 12px;
     padding: 12px 14px;
     margin-bottom: 10px;
     font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
+    color: var(--color-text-primary);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
+.btn-drink:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
 
 .icon {
     margin-right: 8px;
