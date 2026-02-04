@@ -1,17 +1,20 @@
 h1 {
     font-size: 15px;
     margin-bottom: 8px;
+    letter-spacing: 2px;
+    font-weight: 300;
+    color: var(--color-text-primary);
 }
 
 p {
     font-size: 14px;
-    color: #a08e7e;
+    color: var(--color-text-secondary);
     margin-top: 0;
     margin-bottom: 18px;
 }
 
 .dots {
-    color: #a08e7e;
+    color: var(--color-text-secondary);
     font-size: 18px;
     margin-top: 20px;
     letter-spacing: 2px;
