@@ -1,0 +1,21 @@
+.btn-drink {
+    width: 100%;
+    background-color: var(--color-btn-drink);
+    border: none;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.icon {
+    margin-right: 8px;
+}
+
+.duration {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+}
