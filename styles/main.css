@@ -1,5 +1,9 @@
 :root {
     --color-main: #f4f1e9;
+    --color-btn-drink: #efe8de;
+    
+    --color-text-primary: #76685c;
+    --color-text-secondary: #a08e7e;
 }
 
 body {
