@@ -1,5 +1,5 @@
 :root {
-    --color-main: #7796ba;
+    --color-main: #f4f1e9;
 }
 
 body {
@@ -19,4 +19,8 @@ body {
     font-size: 24px;
     cursor: pointer;
     color: #000000;
+}
+
+#btn-close:hover {
+    color: #00000074;
 }
