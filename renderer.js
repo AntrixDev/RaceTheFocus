@@ -8,7 +8,7 @@ function ViewMenu(){
     return `<h1>⊱· CAFEE ORDER ·⊰</h1>
         <p>select your order:P</p>
         <p class="dots">⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯</p>
-            <button class="btn-drink">
+            <button class="btn-drink" onclick="renderMainContnt('test')">
                 <span class="icon">☕</span> Espresso <span class="duration">10 min focus</span>
             </button>
             <button class="btn-drink">
@@ -29,6 +29,9 @@ function renderMainContnt(view){
   switch(view){
     case 'menu':
       appMain.innerHTML = ViewMenu();
+      break;
+    case 'test':
+      appMain.innerHTML = 'passed';
       break;
     default:
       appMain.innerHTML = '<p>App error</p>';
