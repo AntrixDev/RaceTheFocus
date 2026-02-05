@@ -2,15 +2,10 @@ document.getElementById('btn-close').addEventListener('click', () => {
   window.electronAPI.closeWindow();
 });
 
-
 const appMain = document.getElementById('main');
 
-function renderMainContnt(view) {
-
-  appMain.innerHTML = '';
-
-  if(view=='drinkChoice'){
-        appMain.innerHTML = `<h1>⊱· CAFEE ORDER ·⊰</h1>
+function ViewMenu(){
+    return `<h1>⊱· CAFEE ORDER ·⊰</h1>
         <p>select your order:P</p>
         <p class="dots">⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯</p>
             <button class="btn-drink">
@@ -26,10 +21,19 @@ function renderMainContnt(view) {
                 <span class="icon">🥤</span> Soda <span class="duration">50 min focus</span>
             </button>
         <p class="dots">⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯</p>`;
-  }else{
-    appMain.innerHTML = `<h1>App error</h1>`;
+}
+
+function renderMainContnt(view){
+  appMain.innerHTML = '';
+
+  switch(view){
+    case 'menu':
+      appMain.innerHTML = ViewMenu();
+      break;
+    default:
+      appMain.innerHTML = '<p>App error</p>';
   }
 }
 
-renderMainContnt('drinkChoice');
+ renderMainContnt('menu');
 
