@@ -1,8 +1,24 @@
-document.getElementById('btn-close').addEventListener('click', () => {
+const appMain = document.getElementById('main');
+const btnClose = document.getElementById('btn-close');
+
+btnClose.addEventListener('click', ()=>{
   window.electronAPI.closeWindow();
 });
 
-const appMain = document.getElementById('main');
+function renderMainContnt(view){
+  appMain.innerHTML = '';
+
+  switch(view){
+    case 'menu':
+      appMain.innerHTML = ViewMenu();
+      break;
+    case 'details':
+      appMain.innerHTML = ViewDetails();
+      break;
+    default:
+      appMain.innerHTML = '<p>App error</p>';
+  }
+}
 
 function ViewMenu(){
   return `<h1>⊱· CAFEE ORDER ·⊰</h1>
@@ -24,23 +40,8 @@ function ViewMenu(){
 }
 
 function ViewDetails(){
-  return `<p>details view</p>`;
+  return `<p>details vieww</p> <button class="btn-drink" onclick="renderMainContnt('menu')">←Back</button>`
 }
 
-function renderMainContnt(view){
-  appMain.innerHTML = '';
-
-  switch(view){
-    case 'menu':
-      appMain.innerHTML = ViewMenu();
-      break;
-    case 'details':
-      appMain.innerHTML = ViewDetails();
-      break;
-    default:
-      appMain.innerHTML = '<p>App error</p>';
-  }
-}
-
- renderMainContnt('menu');
+renderMainContnt('menu');
 
