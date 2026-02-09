@@ -177,6 +177,14 @@ hr.slip-line {
     margin: 0 auto 10px;
 }
 
+.grab-icon-small {
+    width: 20px;
+    height: 4px;
+    background: #c4beb3;
+    border-radius: 10px;
+    margin: 0 auto 3px;
+}
+
 .thank-you {
     font-size: 10px;
     margin-top: 10px;
