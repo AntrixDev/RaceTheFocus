@@ -148,3 +148,18 @@ hr.slip-line {
     letter-spacing: 2px;
     font-family: sans-serif;
 }
+
+.bottom-slip {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    margin-top: 4px;
+    z-index: 10;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+
+.confirm-text {
+    font-size: 11px;
+    text-transform: lowercase;
+    margin: 0 0 15px 0;
+}
