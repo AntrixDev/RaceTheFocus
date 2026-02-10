@@ -153,7 +153,7 @@ hr.slip-line {
 .grab-icon {
     width: 35px;
     height: 4px;
-    background: #c4beb3;
+    background: #a89b8f;
     border-radius: 10px;
     margin: 0 auto 10px;
 }
@@ -161,7 +161,7 @@ hr.slip-line {
 .grab-icon-small {
     width: 20px;
     height: 4px;
-    background: #c4beb3;
+    background: #c6bcb2;
     border-radius: 10px;
     margin: 0 auto 3px;
 }
