@@ -22,7 +22,7 @@ function renderMenu() {
     <p class="sub">select a race</p>
     <p class="dots">· · · · · · · ·</p>
     ${races.map(r => `
-      <button class="btn-drink" onclick="renderDetails('${r.id}')">
+      <button class="btn-race" onclick="renderDetails('${r.id}')">
         <span class="ico">${r.icon}</span>
         ${r.id}
         <span class="dur">${r.time}</span>

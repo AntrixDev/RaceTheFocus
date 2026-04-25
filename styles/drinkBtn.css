@@ -1,4 +1,4 @@
-.btn-drink {
+.btn-race{
     display: flex; align-items: center; gap: 10px;
     width: 100%; padding: 11px 14px;
     background: var(--btn-bg);
@@ -7,8 +7,23 @@
     color: var(--text-primary); font-size: 14px;
     font-family: inherit;
     transition: background 0.15s, transform 0.1s;
-  }
-  .btn-drink:hover { background: #d5cfc3; }
-  .btn-drink:active { transform: scale(0.98); }
-  .btn-drink .ico { font-size: 16px; }
-  .btn-drink .dur { margin-left: auto; font-size: 11px; color: var(--text-secondary); }
+}
+
+
+.btn-race:hover{
+    background: #d5cfc3; 
+}
+
+.btn-race:active{
+    transform: scale(0.98); 
+}
+
+.btn-race .ico{
+    font-size: 16px; 
+}
+
+.btn-race .dur{
+    margin-left: auto; 
+    font-size: 11px; 
+    color: var(--text-secondary); 
+}
