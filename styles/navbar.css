@@ -35,3 +35,13 @@ nav {
 #btn-close:hover {
     color: var(--color-text-secondary);
 }
+
+.btn-back {
+  width: 100%;
+  padding: 10px;
+  background: var(--btn-bg);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--text-primary);
+}
