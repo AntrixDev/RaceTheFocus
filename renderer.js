@@ -56,18 +56,18 @@ function renderDetails(name) {
     </div>
 
     <div id="race-panel">
-      <div class="track-wrap">
+      <div class="track-wrap" id="track">
         <div id="cntdwn-overlay"></div>
         <div class="edge l"></div>
         <div class="edge r"></div>
         <div class="center-line"></div>
       </div>
-      <div class="car-legend">
+      <div class="car-legend" id="legend">
         <span><span class="dot red"></span> Car 1</span>
         <span><span class="dot blue"></span> Car 2</span>
       </div>
       <br>
-      <div class="dist-board">
+      <div class="dist-board" id="dist-board">
         <div class="dist-left">
           <div class="dist-label">GAP BETWEEN CARS</div>
           <div class="dist-value" id="dist-val">${d.distance}.00 km</div>
@@ -82,6 +82,19 @@ function renderDetails(name) {
   `;
 
   initPull(d);
+}
+
+function showWinner() {
+  const panel = document.getElementById('race-panel');
+
+  const winner = document.createElement('div');
+  winner.className = 'winner-screen';
+  winner.innerHTML = `
+    <div class="trophy">🏆</div>
+    <div class="winner-text">WINNER</div>
+  `;
+
+  panel.insertBefore(winner, panel.firstChild);
 }
 
 function initPull(d) {
@@ -174,7 +187,12 @@ function runRace(d) {
     if (progress >= 1) {
       progress = 1;
       clearInterval(raceInterval);
-      //fnish screen
+
+      document.getElementById('track').style.display = 'none';
+      document.getElementById('legend').style.display = 'none';
+      document.getElementById('dist-board').style.display = 'none';
+
+      showWinner();
     }
     const remainingDist = totalKm - (totalKm * progress);
     
