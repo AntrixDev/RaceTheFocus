@@ -58,6 +58,8 @@ function renderDetails(name) {
     <div id="race-panel">
       <div class="track-wrap" id="track">
         <div id="cntdwn-overlay"></div>
+        <img src="car2.png" id="car1" class="car car-left"  alt="Car 1">
+        <img src="car1.png" id="car2" class="car car-right" alt="Car 2">
         <div class="edge l"></div>
         <div class="edge r"></div>
         <div class="center-line"></div>
