@@ -27,7 +27,7 @@
     filter: drop-shadow(0 6px 8px rgba(0,0,0,0.5));
     top: 50%;
     left: var(--lane-x, 50%);
-    
+
     transform: translate(-50%, calc(-50% + var(--offsetY, 0px)));
     transition: transform 400ms ease;
 }
@@ -63,4 +63,11 @@
 
 .track-active .car-right {
   animation: wiggleRight var(--wiggle-dur, 0.8s) ease-in-out infinite;
+}
+
+.winner-name {
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  margin-top: 6px;
+  opacity: 0.85;
 }

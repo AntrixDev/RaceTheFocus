@@ -13,6 +13,14 @@ const races = [
   { id: 'RACE_4', icon: '🏞️', distance: 72, time: '50 min', name: 'Hyper Speedway' },
 ];
 
+const carOptions = [
+  { id: 'navy',   file: 'navyCar.png',   label: 'Navy Car',   dot: '#1a2e5e' },
+  { id: 'blue',   file: 'blueCar.png',   label: 'Blue Car',   dot: '#2980b9' },
+  { id: 'yellow', file: 'yellowCar.png', label: 'Yellow Car', dot: '#f1c40f' },
+  { id: 'green',  file: 'greenCar.png',  label: 'Green Car',  dot: '#27ae60' },
+  { id: 'red',    file: 'redCar.png',    label: 'Red Car',    dot: '#e74c3c' },
+];
+
 let raceInterval = null;
 
 function renderMenu() {
@@ -34,6 +42,10 @@ function renderMenu() {
 
 function renderDetails(name) {
   const d = races.find(x => x.id === name);
+  
+  const shuffled = [...carOptions].sort(() => Math.random() - 0.5);
+  const [carA, carB] = shuffled;
+  
   app.innerHTML = `
     <h1>🏁 RACE TICKET 🏁</h1>
     <br>
@@ -58,15 +70,15 @@ function renderDetails(name) {
     <div id="race-panel">
       <div class="track-wrap" id="track">
         <div id="cntdwn-overlay"></div>
-        <img src="car2.png" id="car1" class="car car-left"  alt="Car 1">
-        <img src="car1.png" id="car2" class="car car-right" alt="Car 2">
+        <img src="assets/cars/${carA.file}" id="car1" class="car car-left"  alt="${carA.label}">
+        <img src="assets/cars/${carB.file}" id="car2" class="car car-right" alt="${carB.label}">
         <div class="edge l"></div>
         <div class="edge r"></div>
         <div class="center-line"></div>
       </div>
       <div class="car-legend" id="legend">
-        <span><span class="dot red"></span> Car 1</span>
-        <span><span class="dot blue"></span> Car 2</span>
+        <span><span class="dot" style="background:${carA.dot}"></span> ${carA.label}</span>
+        <span><span class="dot" style="background:${carB.dot}"></span> ${carB.label}</span>
       </div>
       <br>
       <div class="dist-board" id="dist-board">
@@ -83,23 +95,23 @@ function renderDetails(name) {
     </div>
   `;
 
-  initPull(d);
+  initPull(d, carA, carB);
 }
 
-function showWinner() {
-  const panel = document.getElementById('race-panel');
-
+function showWinner(label) {
+  const panel  = document.getElementById('race-panel');
   const winner = document.createElement('div');
   winner.className = 'winner-screen';
   winner.innerHTML = `
     <div class="trophy">🏆</div>
     <div class="winner-text">WINNER</div>
+    <div class="winner-name">${label}</div>
   `;
 
   panel.insertBefore(winner, panel.firstChild);
 }
 
-function initPull(d) {
+function initPull(d, carA, carB) {
   const ticket = document.getElementById('pull-ticket');
   if (!ticket) return;
   let dragging = false, startY = 0;
@@ -118,7 +130,7 @@ ticket.style.transform = `translateY(${dy}px) rotate(${tilt}deg)`;
       ticket.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
       ticket.style.transform = 'translateY(160px) rotate(8deg)';
       ticket.style.opacity = '0';
-      setTimeout(() => { ticket.style.display = 'none'; startRace(d); }, 420);
+      setTimeout(() => { ticket.style.display = 'none'; startRace(d, carA, carB); }, 420);
     } else {
       ticket.style.transition = 'transform 0.35s ease';
       ticket.style.transform = 'translateY(0) rotate(0deg)';
@@ -154,17 +166,18 @@ function randomCarBehavior(car, track) {
     const distance = trackHeight * percent;
 
     targetOffsetY = Math.random() > 0.5 ? -distance : distance;
-
-    const delay = 800 + Math.random() * 2000;
-    setTimeout(pickTarget, delay);
+    setTimeout(pickTarget, 800 + Math.random() * 2000);
   }
 
   pickTarget();
 
-  return () => cancelAnimationFrame(animationId);
+  return {
+    cancel: () => cancelAnimationFrame(animationId),
+    getOffsetY: () => currentOffsetY,
+  };
 }
 
-function startRace(d) {
+function startRace(d, carA, carB) {
   const panel = document.getElementById('race-panel');
   panel.style.display = 'block';
 
@@ -200,19 +213,19 @@ function startRace(d) {
       const car1 = document.getElementById('car1');
       const car2 = document.getElementById('car2');
 
-      randomCarBehavior(car1, trackEl);
-      randomCarBehavior(car2, trackEl);
-      runRace(d);
+      const behaviorA = randomCarBehavior(car1, trackEl);
+      const behaviorB = randomCarBehavior(car2, trackEl);
+
+      runRace(d, carA, carB, behaviorA, behaviorB);
     }
     count--;
   }, 800);
 }
 
-function runRace(d) {
-  const distVal = document.getElementById('dist-val');
+function runRace(d, carA, carB, behaviorA, behaviorB) {
+  const distVal  = document.getElementById('dist-val');
   const distLead = document.getElementById('dist-lead');
-  
-  const durationMinutes = parseInt(d.time); 
+  const durationMinutes = parseInt(d.time);
   const totalDurationMs = durationMinutes * 60 * 1000;
   const startTime = Date.now();
   const totalKm = d.distance;
@@ -220,21 +233,30 @@ function runRace(d) {
   if (raceInterval) clearInterval(raceInterval);
 
   raceInterval = setInterval(() => {
-    const now = Date.now();
-    const elapsed = now - startTime;
-    
+    const elapsed = Date.now() - startTime;
     let progress = elapsed / totalDurationMs;
-    
+
     if (progress >= 1) {
       progress = 1;
       clearInterval(raceInterval);
+      behaviorA.cancel();
+      behaviorB.cancel();
+
+      const offA = behaviorA.getOffsetY();
+      const offB = behaviorB.getOffsetY();
+      const winnerLabel =
+        offA < offB ? carA.label :
+        offB < offA ? carB.label :
+        'TIE';
 
       document.getElementById('track').style.display = 'none';
       document.getElementById('legend').style.display = 'none';
       document.getElementById('dist-board').style.display = 'none';
 
-      showWinner();
+      showWinner(winnerLabel);
+      return;
     }
+
     const remainingDist = totalKm - (totalKm * progress);
     
     distVal.textContent = remainingDist.toFixed(2) + ' km';
