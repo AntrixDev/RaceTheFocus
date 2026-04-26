@@ -106,7 +106,7 @@ function initPull(d) {
   const move = (y) => {
     if (!dragging) return;
     const dy = Math.max(0, Math.min(y - startY, 130));
-    const tilt = Math.min(dy / 20, 6); // max ~6deg tilt
+    const tilt = Math.min(dy / 20, 6);
 ticket.style.transform = `translateY(${dy}px) rotate(${tilt}deg)`;
   };
   const end = (y) => {
@@ -150,12 +150,15 @@ function startRace(d) {
       overlay.style.display = 'none';
 
       const minutes = parseInt(d.time);
-      const speed = d.distance / minutes;
+      const rawSpeed = d.distance / minutes;
+
+      const minSpeed = 50;
+      const speed = Math.max(rawSpeed, minSpeed);
 
       const minDur = 0.15;
       const maxDur = 1.2;
 
-      const normalized = Math.min(speed / 60, 1); 
+      const normalized = Math.min(speed / 60, 1);
       const animDuration = maxDur - (normalized * (maxDur - minDur));
 
       centerLine.style.animationDuration = `${animDuration}s`;
