@@ -16,7 +16,7 @@ const races = [
 const carOptions = [
   { id: 'navy',   file: 'navyCar.png',   label: 'Navy Car',   dot: '#1a2e5e' },
   { id: 'blue',   file: 'blueCar.png',   label: 'Blue Car',   dot: '#2980b9' },
-  { id: 'yellow', file: 'yellowCar.png', label: 'Yellow Car', dot: '#f1c40f' },
+  { id: 'orange', file: 'orangeCar.png', label: 'Orange Car', dot: '#f19a0f' },
   { id: 'green',  file: 'greenCar.png',  label: 'Green Car',  dot: '#27ae60' },
   { id: 'red',    file: 'redCar.png',    label: 'Red Car',    dot: '#e74c3c' },
 ];
@@ -258,9 +258,18 @@ function runRace(d, carA, carB, behaviorA, behaviorB) {
     }
 
     const remainingDist = totalKm - (totalKm * progress);
-    
+
     distVal.textContent = remainingDist.toFixed(2) + ' km';
-    distLead.textContent = '..';
+    
+    const offA = behaviorA.getOffsetY();
+    const offB = behaviorB.getOffsetY();
+    const diff = Math.abs(offA - offB);
+
+    if (diff < 0.5) {
+      distLead.textContent = 'TIE';
+    } else {
+      distLead.textContent = offA < offB ? carA.label : carB.label;
+    }
   }, 100);
 }
 
