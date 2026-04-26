@@ -133,6 +133,37 @@ ticket.style.transform = `translateY(${dy}px) rotate(${tilt}deg)`;
   document.addEventListener('touchend', e => end(e.changedTouches[0].clientY));
 }
 
+function randomCarBehavior(car, track) {
+  let currentOffsetY = 0;
+  let targetOffsetY = 0;
+  let animationId;
+
+  function animateFrame() {
+    const diff = targetOffsetY - currentOffsetY;
+    currentOffsetY += diff * 0.04;
+
+    car.style.setProperty('--offsetY', `${currentOffsetY}px`);
+    animationId = requestAnimationFrame(animateFrame);
+  }
+
+  animationId = requestAnimationFrame(animateFrame);
+
+  function pickTarget() {
+    const trackHeight = track.offsetHeight;
+    const percent = 0.01 + Math.random() * 0.14;
+    const distance = trackHeight * percent;
+
+    targetOffsetY = Math.random() > 0.5 ? -distance : distance;
+
+    const delay = 800 + Math.random() * 2000;
+    setTimeout(pickTarget, delay);
+  }
+
+  pickTarget();
+
+  return () => cancelAnimationFrame(animationId);
+}
+
 function startRace(d) {
   const panel = document.getElementById('race-panel');
   panel.style.display = 'block';
@@ -165,7 +196,12 @@ function startRace(d) {
 
       centerLine.style.animationDuration = `${animDuration}s`;
       track.classList.add('track-active');
+      const trackEl = document.getElementById('track');
+      const car1 = document.getElementById('car1');
+      const car2 = document.getElementById('car2');
 
+      randomCarBehavior(car1, trackEl);
+      randomCarBehavior(car2, trackEl);
       runRace(d);
     }
     count--;
