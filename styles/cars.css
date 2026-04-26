@@ -1,0 +1,64 @@
+.car-legend{
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    padding: 0 4px;
+}
+.dot{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.dot.red{
+    background: #e74c3c;
+}
+.dot.blue{
+    background: #2980b9;
+}
+
+.car{
+    position: absolute;
+    width: 30px;
+    height: auto;
+    z-index: 5;
+    filter: drop-shadow(0 6px 8px rgba(0,0,0,0.5));
+
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.car-left{
+    left: 25%;
+}
+.car-right{
+    left: 75%;
+}
+
+@keyframes wiggleLeft{
+  0%, 100%{
+        transform: translate(-50%, -50%) translateX(-3px); 
+    }
+  50%{
+        transform: translate(-50%, -50%) translateX(3px);
+    }
+}
+
+@keyframes wiggleRight {
+    0%, 100%{
+        transform: translate(-50%, -50%) translateX(3px);
+    }
+    50%{
+        transform: translate(-50%, -50%) translateX(-3px);
+    }
+}
+
+.track-active .car-left  {
+  animation: wiggleLeft var(--wiggle-dur, 0.8s) ease-in-out infinite;
+}
+
+.track-active .car-right {
+  animation: wiggleRight var(--wiggle-dur, 0.8s) ease-in-out infinite;
+}
