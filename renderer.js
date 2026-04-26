@@ -7,10 +7,10 @@ btnClose.addEventListener('click', ()=>{
 
 const app = document.getElementById('app');
 const races = [
-  { id: 'RACE_1', icon: '🛣️', distance: 60, time: '1 min', name: 'Sprint Circuit' },
-  { id: 'RACE_2', icon: '🌃', distance: 28, time: '15 min', name: 'Grand Prix Track' },
-  { id: 'RACE_3', icon: '🏙️', distance: 45, time: '25 min', name: 'Endurance Rally' },
-  { id: 'RACE_4', icon: '🏞️', distance: 72, time: '50 min', name: 'Hyper Speedway' },
+  { id: 'Sprint_Circuit', icon: '🛣️', distance: 30, time: '5 min', name: 'Sprint Circuit' },
+  { id: 'Grand_Prix_Track', icon: '🌃', distance: 80, time: '15 min', name: 'Grand Prix Track' },
+  { id: 'Endurance_Rally', icon: '🏙️', distance: 120, time: '25 min', name: 'Endurance Rally' },
+  { id: 'Hyper_Speedway', icon: '🏞️', distance: 160, time: '50 min', name: 'Hyper Speedway' },
 ];
 
 const carOptions = [
@@ -32,7 +32,7 @@ function renderMenu() {
     ${races.map(r => `
       <button class="btn-race" onclick="renderDetails('${r.id}')">
         <span class="ico">${r.icon}</span>
-        ${r.id}
+        ${r.name}
         <span class="dur">${r.time}</span>
       </button>
     `).join('')}
@@ -59,9 +59,9 @@ function renderDetails(name) {
       <div class="slip-pull" id="pull-ticket">
         <div class="grab-bar-sm"></div>
         <div class="grab-bar"></div>
-        <p class="pull-hint">↓ pull down to start race ↓</p>
+        <p class="pull-hint">↓ pull down to start the race ↓</p>
         <hr class="slip-line">
-        <p class="pull-icons">🏎️ &nbsp; 🏁</p>
+        <p class="pull-icons">🏎️. ݁₊ ⊹ . ݁˖ .</p>
         <hr class="slip-line">
         <p class="slip-footer">GOOD LUCK DRIVER ♡</p>
       </div>
@@ -102,11 +102,14 @@ function showWinner(label) {
   const panel  = document.getElementById('race-panel');
   const winner = document.createElement('div');
   winner.className = 'winner-screen';
-  winner.innerHTML = `
-    <div class="trophy">🏆</div>
+  const isTie = label === 'TIE';
+
+  winner.innerHTML = isTie 
+  ?`<div class="trophy">⋆🤝⋆</div>
+    <div class="winner-text">IT'S A TIE!</div>`
+  : `<div class="trophy">⋆🏆⋆</div>
     <div class="winner-text">WINNER</div>
-    <div class="winner-name">${label}</div>
-  `;
+    <div class="winner-name">${label}</div>`;
 
   panel.insertBefore(winner, panel.firstChild);
 }
